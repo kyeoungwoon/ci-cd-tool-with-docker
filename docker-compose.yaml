@@ -1,0 +1,21 @@
+services:
+  web-server:
+    build:
+      context: ./web-server
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./logs:/var/log/nginx
+      - ./web-server/nginx:/etc/nginx/
+    depends_on:
+      - api-server
+
+  api-server:
+    build:
+      context: ./api-server
+      dockerfile: Dockerfile
+    ports:
+      - "7777:7777"
+    volumes:
+      - ./api-server:/app

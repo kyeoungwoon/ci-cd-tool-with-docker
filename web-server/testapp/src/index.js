@@ -1,13 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+import { GoogleOAuthProvider } from "@react-oauth/google";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+const CLIENT_ID =
+  "1069042715375-c6arajr9iqlqiho731v2t9p95naqjv3t.apps.googleusercontent.com";
+
 root.render(
   <React.StrictMode>
-    <App />
+    <GoogleOAuthProvider clientId={CLIENT_ID}>
+      <App />
+    </GoogleOAuthProvider>
   </React.StrictMode>
 );
 

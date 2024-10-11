@@ -1,24 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+
+import React from "react";
+import { useState } from "react";
+import { jwtDecode } from "jwt-decode";
+
+import { GoogleLogin } from "@react-oauth/google";
 
 function App() {
+  const [user, setUser] = useState({});
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div>
+        clientID : {user.clientId} <br />
+        credential : {JSON.stringify(jwtDecode(user.credential), null, 2)}{" "}
+        <br />
+        select_by : {user.select_by} <br />
+      </div>
+      <GoogleLogin
+        onSuccess={(credentialResponse) => {
+          console.log(credentialResponse);
+          setUser(credentialResponse);
+        }}
+        onError={() => {
+          console.log("Error");
+        }}
+      />
+    </>
   );
 }
 

@@ -23,8 +23,8 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: ${{ secrets.SERVER_PORT }}
           script: |
-            cd /Users/codingserver/Desktop/deploy-test-tool
-            git pull
+            cd ${{ secrets.SERVER_PATH }}
+            git reset --hard origin/main
             /usr/local/bin/docker compose down --rmi local
             /usr/local/bin/docker compose build --no-cache
             /usr/local/bin/docker compose up -d
